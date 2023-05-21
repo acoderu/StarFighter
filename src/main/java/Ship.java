@@ -8,37 +8,55 @@ import javax.imageio.ImageIO;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 
+/**
+ * Ship is a concrete class that extends the MovingThing interface
+ */
 public class Ship extends MovingThing
 {
     private int speed;
     private Image image;
 
-    public Ship()
-    {
+    /**
+     * Ship default constructor
+     */
+    public Ship() {
         this(0,0,50,50,0);
-        // super(0,0,50,50);
-        // speed = 0;
     }
 
-    public Ship(int x, int y)
-    {
+    /**
+     * Ship constructor with x,y coordinates
+     * @param x
+     * @param y
+     */
+    public Ship(int x, int y) {
         this(x,y,50,50, 0);
-        //add code here
     }
 
-    public Ship(int x, int y, int s)
-    {
+    /**
+     * Ship constructor with x,y  & speed parameters
+     * @param x
+     * @param y
+     * @param s
+     */
+    public Ship(int x, int y, int s) {
         this(x,y,50,50,s);
-        //add code here
     }
 
-    public Ship(int x, int y, int w, int h, int s)
-    {
+    /**
+     * Ship constructor with x, y, width , height and speed parameters
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param s
+     */
+    public Ship(int x, int y, int w, int h, int s) {
+        //call super since x,y,w,h are stored in the MovingThing abstract class
         super(x,y,w,h);
+        //set speed in the ship class since speed is a parameter inside the Ship class
         speed = s;
         //add code here
-        try
-        {
+        try {
             //this sets ship.jpg as the image for your ship
             //for this to work ship.jpg needs to be in the same folder as this .java file
             URL url = getClass().getResource("ship.jpg");
@@ -46,56 +64,72 @@ public class Ship extends MovingThing
         }
         catch(Exception e)
         {
-            //feel free to do something here or not
+            System.out.println("project accessing resource ship.jpg " + e);
         }
     }
 
 
-    public void setSpeed(int s)
-    {
+    /**
+     *
+     * @param s
+     */
+    public void setSpeed(int s) {
         speed = s;
-        //add more code
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSpeed()
     {
         return speed;
         //continue coding
     }
 
-    //add code here
-    //think about ALL your global variables and how you can use them to "move"
-    //keep your parameter in mind as well
+    /**
+     * method to handle various move interactions for the ship
+     * @param direction
+     * //add code here
+     * //think about ALL your global variables and how you can use them to "move"
+     * //keep your parameter in mind as well
+     */
     public void move(String direction)
     {
-        if (direction.equals("RIGHT"))
-        {
+        if (direction.equals("RIGHT")) {
+            //set the X to minimum of 795 or current X + speed.
+            //using minimum of the two so ship doesn't go out of bounds
             setX(min(795, getX()+getSpeed()));
         }
 
-        if (direction.equals("LEFT"))
-        {
+        if (direction.equals("LEFT")) {
+            //set the X to max of 5 or current x - speed
+            //so that the ship doesn't get out of bound on the left hand side
             setX(max(5,getX()-getSpeed()));
         }
 
-        if (direction.equals("UP"))
-        {
+        if (direction.equals("UP")) {
+            //set the Y to max of 5 or the current Y - speed
+            //so that the ship doesn't go out of bounds on the top axis
             setY(max(5,getY()-getSpeed()));
         }
 
-        if (direction.equals("DOWN"))
-        {
+        if (direction.equals("DOWN")) {
+            //set the Y to minimum of 595 and currentY+speed
+            //this is so that the ship doesnt go out bounds on the bottom of the grid
             setY(min(595,getY()+getSpeed()));
         }
     }
 
-    public void draw( Graphics window )
-    {
+    /**
+     * method to draw the ship
+     * @param window
+     */
+    public void draw( Graphics window ) {
         window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
     }
 
-    public String toString()
-    {
+    public String toString() {
         return super.toString() + " " + getSpeed();
     }
 }

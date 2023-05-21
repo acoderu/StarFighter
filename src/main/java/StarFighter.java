@@ -4,6 +4,9 @@
 import javax.swing.JFrame;
 import java.awt.Component;
 
+/**
+ * Main to test the StarFighter
+ */
 public class StarFighter extends JFrame
 {
     private static final int WIDTH = 800;

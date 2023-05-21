@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.*;
 import static java.lang.System.*;
 
+/**
+ * Main to test the ship
+ */
 public class Shiptest
 {
     public static void main( String args[] )

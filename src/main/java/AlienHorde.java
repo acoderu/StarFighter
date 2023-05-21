@@ -6,44 +6,76 @@ import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlienHorde
-{
+/**
+ * Class to manage an AlienHorde ( a set of aliens)
+ */
+public class AlienHorde {
     private List<Alien> aliens;
 
-    public AlienHorde(int size)
-    {
+    /**
+     * //and fill with size amount of aliens (75 pixels apart)
+     * //if your row is full (out of bounds of screen)
+     * //move down a row (75 pixels)
+     * //starting point is 25, 50
+     * //first add aliens with speed of 0 to make sure you spacing is good
+     *
+     * @param size indicates number of aliens to create
+     */
+    public AlienHorde(int size) {
         aliens = new ArrayList<Alien>();
-        //initalize ArrayList
 
+        int x = 25;
+        int y = 50;
+        //starting point is 25, 50
+        //initialize the aliens array
         //and fill with size amount of aliens (75 pixels apart)
         //if your row is full (out of bounds of screen)
-        //move down a row (75 pixels)
-        //starting point is 25, 50
-        //first add aliens with speed of 0 to make sure you spacing is good
-
+        //move down a row use the y methods (75 pixels)
+        for (int i = 0; i < size; i++) {
+            //setting the speed of the alien as 1, tried experimenting with
+            //different speeds and 1 seemed to work well
+            add(new Alien(x, y, 1));
+            x += 75; //per instructions, the x coordinate of the clients are 75 pixels apart
+            if (x + 75 > 800) {
+                //if the alien goes out of bound on the right side
+                //start the alien from the next row at left side
+                x = 25; //since the starting x coordinate of the alien is 25
+                y = y + 40; //since the height spacing of the alien is 40
+            }
+        }
     }
 
-    public void add(Alien al)
-    {
-        add(al);
+    /**
+     * add the Alien
+     *
+     * @param al
+     */
+    public void add(Alien al) {
         //add an al to the list
+        aliens.add(al);
     }
 
+    /**
+     * this method is called to draw all the aliens
+     *
+     * @param window
+     */
     public void drawEmAll(Graphics window) {
-        for (int i = 0; i < aliens.size(); i++)
-        {
+        for (int i = 0; i < aliens.size(); i++) {
             aliens.get(i).draw(window);
         }
-        // make sure you draw all aliens in the list
     }
 
+    /**
+     * method called to moves all aliens together
+     */
     public void moveEmAll() {
-        for (int i = 0; i < aliens.size(); i++)
-        {
-            aliens.get(i).move("DOWN");
+        for (int i = 0; i < aliens.size(); i++) {
+            Alien alien = aliens.get(i);
+            alien.move("Down");
         }
-        // make sure you move all aliens in the list
     }
+
     /*
        public void removeDeadOnes(List<Ammo> shots)
         {
@@ -55,8 +87,7 @@ public class AlienHorde
           //make sure you break out of the loop if this happens
         }
     */
-    public String toString()
-    {
+    public String toString() {
         return "" + aliens;
     }
 }
