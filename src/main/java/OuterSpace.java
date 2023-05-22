@@ -85,7 +85,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //alienTwo.draw(graphToBack);
         horde.moveEmAll();
         horde.drawEmAll(graphToBack);
-        //Ammo.draw(graphToBack);
         twoDGraph.drawImage(back, null, 0, 0);
         back = null;
     }
