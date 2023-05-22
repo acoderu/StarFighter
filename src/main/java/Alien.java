@@ -10,7 +10,7 @@ import static java.lang.Integer.min;
 
 /**
  * Alien is a concrete class and extends abstract class MovingThing
- * test
+ *
  */
 public class Alien extends MovingThing {
     //private variables
