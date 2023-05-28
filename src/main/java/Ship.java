@@ -96,28 +96,25 @@ public class Ship extends MovingThing
      */
     public void move(String direction)
     {
-        if (direction.equals("RIGHT")) {
-            //set the X to minimum of 795 or current X + speed.
-            //using minimum of the two so ship doesn't go out of bounds
-            setX(min(795, getX()+getSpeed()));
+        if(direction.equals("LEFT")) // x cord
+        {
+            if(getX()>=speed)
+                setX(getX()-speed);
         }
-
-        if (direction.equals("LEFT")) {
-            //set the X to max of 5 or current x - speed
-            //so that the ship doesn't get out of bound on the left hand side
-            setX(max(5,getX()-getSpeed()));
+        if(direction.equals("RIGHT")) //x cord
+        {
+            if(getX()<=(750-speed))
+                setX(getX()+speed);
         }
-
-        if (direction.equals("UP")) {
-            //set the Y to max of 5 or the current Y - speed
-            //so that the ship doesn't go out of bounds on the top axis
-            setY(max(5,getY()-getSpeed()));
+        if(direction.equals("DOWN")) //y cord
+        {
+            if(getY()<=530-speed)
+                setY(getY()+speed);
         }
-
-        if (direction.equals("DOWN")) {
-            //set the Y to minimum of 595 and currentY+speed
-            //this is so that the ship doesnt go out bounds on the bottom of the grid
-            setY(min(595,getY()+getSpeed()));
+        if(direction.equals("UP")) //y cord
+        {
+            if(getY()>=speed)
+                setY(getY()-speed);
         }
     }
 
