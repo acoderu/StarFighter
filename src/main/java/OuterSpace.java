@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 public class OuterSpace extends Canvas implements KeyListener, Runnable {
     // uncomment and comment as necessary as you add functionality to your project*
     private AlienHorde horde;
-    //private Bullets shots;
+    private Bullets shots;
     private Ship ship;
     private Alien alienOne;
     private Alien alienTwo;
@@ -33,6 +33,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         alienOne = new Alien(100, 50);
         alienTwo = new Alien(150, 50);
         horde = new AlienHorde(20);
+        shots = new Bullets();
         this.addKeyListener(this);
         new Thread(this).start();
         setVisible(true);
@@ -74,7 +75,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             ship.move("DOWN");
         }
         //add code to fire a bullet - Part 3
-
+        if(keys[4]) {
+            shots.add(new Ammo(ship.getX() + ship.getWidth()/2, ship.getY() , 2));
+            keys[4] = false;
+        }
         //add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship -- Part 3
 
         //make sure you've drawn all your stuff
@@ -84,8 +88,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         //alienOne.draw(graphToBack);
         //alienTwo.draw(graphToBack);
         horde.moveEmAll();
+        horde.removeDeadOnes(shots.getList());
         horde.drawEmAll(graphToBack);
-        //Ammo.draw(graphToBack);
+        shots.moveEmAll();
+        shots.drawEmAll(graphToBack);
         twoDGraph.drawImage(back, null, 0, 0);
         back = null;
     }

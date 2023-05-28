@@ -15,7 +15,7 @@ public class Alien extends MovingThing {
     //private variables
     private int speed;
     private Image image;
-
+    private boolean isDestroyed;
     /**
      * Default constructor
      */
@@ -66,6 +66,22 @@ public class Alien extends MovingThing {
             //comes in this block of code
             System.out.println("cant create alien.JPG " + e);
         }
+    }
+
+    /**
+     * method returns whether the alien is destroyed
+     * @return
+     */
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    /**
+     * method marks that the alien is destroyed
+     * @param destroyed
+     */
+    public void setDestroyed(boolean destroyed) {
+        isDestroyed = destroyed;
     }
 
     /**
@@ -132,7 +148,8 @@ public class Alien extends MovingThing {
      */
     public void draw(Graphics window) {
         //move the alien on each call to draw
-        move("DOWN");
+        //direction doesn't matter for the alien since alien always moves down
+        move(null);
         //draw the alien at the new coordinate after the alien has moved
         window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
     }
